@@ -9,7 +9,7 @@ def create_app():
     # CORS 설정 추가
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],  # React 앱 URL
+        allow_origins=["*"],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
