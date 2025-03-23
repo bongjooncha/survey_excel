@@ -39,6 +39,29 @@ const StartButton = styled.button`
   }
 `;
 
+const OthersButton = styled.button`
+  background-color: #95a5a6;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 20px;
+  
+  &:hover {
+    background-color: #7f8c8d;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+`;
+
 const StartPage: React.FC = () => {
   const navigate = useNavigate();
   const { resetTest } = useTest();
@@ -48,6 +71,10 @@ const StartPage: React.FC = () => {
     navigate('/test');
   };
   
+  const handleSeeOthers = () => {
+    navigate('/others');
+  };
+  
   return (
     <Container>
       <Title>당신의 인생 여정: 새로운 도시에서의 1년</Title>
@@ -55,9 +82,14 @@ const StartPage: React.FC = () => {
         여러분의 선택을 통해 성향을 알아보는 테스트입니다.<br />
         10개의 질문에 답하고 자신의 성향을 확인해보세요.
       </Subtitle>
-      <StartButton onClick={handleStart}>
-        테스트 시작하기
-      </StartButton>
+      <ButtonContainer>
+        <StartButton onClick={handleStart}>
+          테스트 시작하기
+        </StartButton>
+        <OthersButton onClick={handleSeeOthers}>
+          다른 사용자 결과 보기
+        </OthersButton>
+      </ButtonContainer>
     </Container>
   );
 };

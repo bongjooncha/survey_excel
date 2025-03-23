@@ -71,6 +71,22 @@ const SecondaryButton = styled(Button)`
   }
 `;
 
+const OthersButton = styled(Button)`
+  background-color: #2ecc71;
+  
+  &:hover {
+    background-color: #27ae60;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+`;
+
 const ResultType = styled.div`
   font-size: 24px;
   color: #3498db;
@@ -137,6 +153,10 @@ const ResultPage: React.FC = () => {
     navigate('/');
   };
   
+  const handleSeeOthers = () => {
+    navigate('/others');
+  };
+  
   return (
     <Container>
       <Title>테스트 결과</Title>
@@ -155,19 +175,31 @@ const ResultPage: React.FC = () => {
             <p>결과를 저장하시겠습니까?</p>
             <Input
               type="text"
-              placeholder="이름을 입력하세요"
+              placeholder="닉네임을 영어로 작성해주세요"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
             <Button onClick={handleSave}>결과 저장하기</Button>
           </>
         ) : (
-          <p>결과가 성공적으로 저장되었습니다!</p>
+          <>
+            <p>결과가 성공적으로 저장되었습니다!</p>
+            <ButtonContainer>
+              <OthersButton onClick={handleSeeOthers}>
+                다른 사용자 결과 보기
+              </OthersButton>
+              <SecondaryButton onClick={handleRetake}>
+                테스트 다시 하기
+              </SecondaryButton>
+            </ButtonContainer>
+          </>
         )}
         
-        <SecondaryButton onClick={handleRetake}>
-          테스트 다시 하기
-        </SecondaryButton>
+        {!saved && (
+          <SecondaryButton onClick={handleRetake}>
+            테스트 다시 하기
+          </SecondaryButton>
+        )}
       </FormContainer>
     </Container>
   );
