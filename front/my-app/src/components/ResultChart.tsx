@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { TestResult } from '../types';
+import { categoryNames } from '../data/questions';
 
 interface ResultChartProps {
   result: TestResult;
@@ -57,17 +58,6 @@ const categoryColors: Record<string, string> = {
   economy: '#34495e'      // 남색
 };
 
-// 카테고리 한글 이름
-const categoryNames: Record<string, string> = {
-  programming: '프로그래밍',
-  design: '디자인',
-  planning: '기획',
-  culture: '문화',
-  travel: '여행',
-  food: '맛집',
-  health: '건강',
-  economy: '경제'
-};
 
 const ResultChart: React.FC<ResultChartProps> = ({ result }) => {
   // 최대 점수 계산 (차트 비율 조정용)
@@ -77,7 +67,7 @@ const ResultChart: React.FC<ResultChartProps> = ({ result }) => {
     <ChartContainer>
       {Object.entries(result).map(([category, score]) => (
         <CategoryRow key={category}>
-          <CategoryName>{categoryNames[category] || category}</CategoryName>
+          <CategoryName>{categoryNames[category].name || category}</CategoryName>
           <BarContainer>
             <Bar 
               width={`${(score / maxScore) * 100}%`} 

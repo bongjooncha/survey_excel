@@ -3,6 +3,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useTest } from '../contexts/TestContext';
+import image from '../assets/image.png';
+
+const StyledImage = styled.img`
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+  // 필요에 따라 스타일 추가
+`;
 
 const Container = styled.div`
   max-width: 800px;
@@ -82,6 +90,7 @@ const StartPage: React.FC = () => {
         여러분의 선택을 통해 성향을 알아보는 테스트입니다.<br />
         10개의 질문에 답하고 자신의 성향을 확인해보세요.
       </Subtitle>
+      <StyledImage src={image} alt="설문조사 이미지" />
       <ButtonContainer>
         <StartButton onClick={handleStart}>
           테스트 시작하기

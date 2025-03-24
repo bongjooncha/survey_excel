@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { getAllResults } from '../api/api';
 import { UserResult } from '../types';
 import PeopleList from '../components/PeopleList';
-
+import { categoryNames } from '../data/questions';
 const Container = styled.div`
   max-width: 800px;
   margin: 0 auto;
@@ -81,17 +81,7 @@ const SeeOthers: React.FC = () => {
   }, []);
   
   const getCategoryName = (category: string): string => {
-    const categoryNames: Record<string, string> = {
-      programming: '프로그래밍',
-      design: '디자인',
-      planning: '기획',
-      culture: '문화',
-      travel: '여행',
-      food: '맛집',
-      health: '건강',
-      economy: '경제'
-    };
-    return categoryNames[category] || category;
+    return categoryNames[category].name || category;
   };
   
   const handleBack = () => {
@@ -119,7 +109,7 @@ const SeeOthers: React.FC = () => {
               </CategoryTab>
             ))}
           </CategoryTabs>
-          
+          <br/> 
           <PeopleList 
             people={results}
             category={selectedCategory}

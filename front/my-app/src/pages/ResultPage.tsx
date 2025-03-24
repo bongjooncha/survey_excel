@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useTest } from '../contexts/TestContext';
 import ResultChart from '../components/ResultChart';
 import { saveResult } from '../api/api';
+import { categoryNames } from '../data/questions';
 
 const Container = styled.div`
   max-width: 800px;
@@ -18,6 +19,36 @@ const Title = styled.h1`
   margin-bottom: 30px;
   color: #333;
 `;
+
+const ResultDescription = styled.div`
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  text-align: left;
+`;
+
+const CategoryHeader = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+const CategoryImage = styled.img`
+  width: 30%;
+  height: auto; 
+  object-fit: contain;
+  display: block; 
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const CategoryTitle = styled.h3`
+  color: #3498db;
+  margin: 0;
+  font-size: 18px;
+`;
+
 
 const ResultSection = styled.div`
   background-color: white;
@@ -118,17 +149,7 @@ const ResultPage: React.FC = () => {
   const topCategories = getTopCategories();
   
   const getCategoryName = (category: string): string => {
-    const categoryNames: Record<string, string> = {
-      programming: '프로그래밍',
-      design: '디자인',
-      planning: '기획',
-      culture: '문화',
-      travel: '여행',
-      food: '맛집',
-      health: '건강',
-      economy: '경제'
-    };
-    return categoryNames[category] || category;
+    return categoryNames[category].name || category;
   };
   
   const handleSave = async () => {
@@ -162,9 +183,21 @@ const ResultPage: React.FC = () => {
       <Title>테스트 결과</Title>
       
       <ResultSection>
-        <ResultType>
-          당신은 {topCategories.map(cat => getCategoryName(cat)).join(', ')} 유형입니다!
-        </ResultType>
+      <ResultType>
+  당신은 {topCategories.map(cat => getCategoryName(cat)).join(', ')} 유형입니다!
+</ResultType>
+
+{topCategories.map(category => (
+  <ResultDescription key={category}>
+    <CategoryHeader>
+      <CategoryTitle>{getCategoryName(category)}</CategoryTitle>
+    </CategoryHeader>
+    <p>{categoryNames[category].description}</p>
+    <br/><br/>
+      <CategoryImage src={categoryNames[category].image} alt={getCategoryName(category)} />
+      <br/><br/>
+  </ResultDescription>
+))}
         
         <ResultChart result={result} />
       </ResultSection>
